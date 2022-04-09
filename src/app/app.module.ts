@@ -9,6 +9,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { TrendsComponent } from './components/trends/trends.component';
 import { AuthmoduleModule } from './auth/authmodule/authmodule.module';
+import { TweetsComponent } from './components/tweets/tweets.component';
+import { ComposeTweetComponent } from './components/compose-tweet/compose-tweet.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { AuthmoduleModule } from './auth/authmodule/authmodule.module';
     NavbarComponent,
     HomeComponent,
     TrendsComponent,
+    TweetsComponent,
+    ComposeTweetComponent,
   ],
   imports: [
     BrowserModule,

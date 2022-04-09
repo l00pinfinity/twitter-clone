@@ -1,1 +1,19 @@
-<p>home works!</p>
+<div class="container">
+    <div class="row">
+      <div class="col-8">
+        <nav class="navbar sticky-top navbar-light bg-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" routerLink="/">Home</a>
+          </div>
+        </nav>
+        <br>
+        <app-compose-tweet></app-compose-tweet>
+        <div>
+          <app-tweets></app-tweets>
+        </div>
+      </div>
+      <div class="col-4">
+          <app-trends></app-trends>
+      </div>
+    </div>
+  </div>
