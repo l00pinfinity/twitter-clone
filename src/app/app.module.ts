@@ -11,6 +11,7 @@ import { TrendsComponent } from './components/trends/trends.component';
 import { AuthmoduleModule } from './auth/authmodule/authmodule.module';
 import { TweetsComponent } from './components/tweets/tweets.component';
 import { ComposeTweetComponent } from './components/compose-tweet/compose-tweet.component';
+import { ExploreComponent } from './components/explore/explore.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ComposeTweetComponent } from './components/compose-tweet/compose-tweet.
     TrendsComponent,
     TweetsComponent,
     ComposeTweetComponent,
+    ExploreComponent,
   ],
   imports: [
     BrowserModule,
