@@ -12,4 +12,8 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  signUpForm(){
+    alert('Sign Up Form');
+  }
+
 }
