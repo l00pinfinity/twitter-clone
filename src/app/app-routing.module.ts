@@ -11,8 +11,8 @@ const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path:'login',component:LoginComponent,pathMatch:'full'},
   {path:'signup', component: SignupComponent, pathMatch:'full'},
-  {path: 'home',component: HomeComponent, pathMatch: 'full'},
-  {path: 'explore',component:ExploreComponent, pathMatch: 'full'},
+  {path: 'home',component: HomeComponent, pathMatch:'full'},
+  {path: 'explore',component:ExploreComponent, pathMatch:'full'},
 
   {path:'i/flow/signup',component:IsignupComponent, pathMatch: 'full'},
   {path:'i/flow/login',component:IloginComponent, pathMatch: 'full'},
@@ -20,6 +20,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

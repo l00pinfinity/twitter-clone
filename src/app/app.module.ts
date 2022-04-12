@@ -10,7 +10,6 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { TrendsComponent } from './components/trends/trends.component';
-import { AuthmoduleModule } from './auth/authmodule/authmodule.module';
 import { TweetsComponent } from './components/tweets/tweets.component';
 import { ComposeTweetComponent } from './components/compose-tweet/compose-tweet.component';
 import { ExploreComponent } from './components/explore/explore.component';
@@ -33,7 +32,6 @@ import { IsignupComponent } from './auth/flow/isignup/isignup.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AuthmoduleModule,
     ReactiveFormsModule,
     HttpClientModule,
   ],
