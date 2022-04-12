@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-ilogin',
@@ -13,7 +16,7 @@ export class IloginComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
-  constructor() { }
+  constructor(private http:HttpClient,private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +24,14 @@ export class IloginComponent implements OnInit {
   //on form submit
   loginUser() {
     console.log(this.ilogin.value);
+    this.http.post<any>(environment.apiUrl+'/auth/signin',this.ilogin.value).subscribe(res=>{
+      console.log(res);
+      if(res.success){
+        this.router.navigate(['/home']);
+      }
+    },err=>{
+      console.log(err);
+    });
   }
 
 }
