@@ -24,7 +24,7 @@ export class IloginComponent implements OnInit {
   //on form submit
   loginUser() {
     console.log(this.ilogin.value);
-    this.http.post<any>(environment.apiUrl+'/auth/signin',this.ilogin.value).subscribe(res=>{
+    this.http.post<any>(environment.apiUrl+'/auth/users',this.ilogin.value).subscribe(res=>{
       console.log(res);
       if(res.success){
         this.router.navigate(['/home']);

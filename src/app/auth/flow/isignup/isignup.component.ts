@@ -23,7 +23,7 @@ export class IsignupComponent implements OnInit {
 
   registerUser(){
     console.log(this.isignup.value);
-    this.http.post<any>(environment.apiUrl+'/auth/signup',this.isignup.value).subscribe(res=>{
+    this.http.post<any>(environment.apiUrl+'/auth/user',this.isignup.value).subscribe(res=>{
       console.log(res);
       if(res.success){
         this.router.navigate(['/i/flow/login']);
