@@ -16,6 +16,7 @@ import { ExploreComponent } from './components/explore/explore.component';
 import { IloginComponent } from './auth/flow/ilogin/ilogin.component';
 import { IsignupComponent } from './auth/flow/isignup/isignup.component';
 import { TokenInterceptorInterceptor } from './services/interceptor/token-interceptor.interceptor';
+import { DateAgoPipe } from './services/pipe/date-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { TokenInterceptorInterceptor } from './services/interceptor/token-interc
     ExploreComponent,
     IloginComponent,
     IsignupComponent,
+    DateAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,7 @@ import { TokenInterceptorInterceptor } from './services/interceptor/token-interc
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorInterceptor,multi:true}],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
