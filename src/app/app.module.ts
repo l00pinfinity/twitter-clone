@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -15,6 +15,7 @@ import { ComposeTweetComponent } from './components/compose-tweet/compose-tweet.
 import { ExploreComponent } from './components/explore/explore.component';
 import { IloginComponent } from './auth/flow/ilogin/ilogin.component';
 import { IsignupComponent } from './auth/flow/isignup/isignup.component';
+import { TokenInterceptorInterceptor } from './services/interceptor/token-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { IsignupComponent } from './auth/flow/isignup/isignup.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptorInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

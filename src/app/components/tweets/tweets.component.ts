@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-tweets',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TweetsComponent implements OnInit {
 
-  constructor() { }
+  tweets$: any;
+  page = 0;
+  size = 10;
+
+  constructor(private data:DataService) { }
+
+  getTweets(){
+    this.data.getTweets(this.page,this.size).subscribe(data => {
+      console.log(data);
+      this.tweets$ = data.content;
+    })
+  }
 
   ngOnInit(): void {
+    this.getTweets();
   }
 
 }

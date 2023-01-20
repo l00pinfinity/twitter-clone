@@ -8,8 +8,8 @@
     </svg>
   </div>
   <div class="col-md-11">
-    <form class="mb-3">
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+    <form class="mb-3" [formGroup]="tweet" (ngSubmit)="postTweet()">
+      <textarea class="form-control" id="tweet" rows="3" formControlName="body"
         placeholder="What's happening?"></textarea>
         <p></p>
       <div class="d-flex justify-content-between">
@@ -38,7 +38,7 @@
             </li>
           </ul>
         </div>
-        <a class="btn btn-primary mr-2">Tweet</a>
+        <button class="btn btn-primary mr-2" [disabled]="tweet.invalid">Tweet</button>
       </div>
     </form>
   </div>

@@ -84,12 +84,12 @@
     </a>
     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser3">
       <li><a class="dropdown-item" routerLink="/compose/tweet">Compose Tweet</a></li>
-      <li><a class="dropdown-item"routerLink="/{{username}}">Profile</a></li>
-      <li><a class="dropdown-item"routerLink="/settings">Settings</a></li>
+      <li><a class="dropdown-item" routerLink="/{{username}}">Profile</a></li>
+      <li><a class="dropdown-item" routerLink="/settings">Settings</a></li>
       <li>
         <hr class="dropdown-divider">
       </li>
-      <li><a class="dropdown-item" routerLink="/logout">Sign out</a></li>
+      <li><a class="dropdown-item" routerLink="/logout" (click)="logout()">Sign out</a></li>
     </ul>
   </div>
 </div>

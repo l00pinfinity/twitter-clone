@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -10,6 +10,10 @@ import { environment } from "../../../../environments/environment";
   styleUrls: ['./isignup.component.scss']
 })
 export class IsignupComponent implements OnInit {
+
+  isSuccessul = false;
+  errorMessage!: string;
+
   isignup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     username: new FormControl('', [Validators.required]),
@@ -23,13 +27,14 @@ export class IsignupComponent implements OnInit {
 
   registerUser(){
     console.log(this.isignup.value);
-    this.http.post<any>(environment.apiUrl+'/auth/user',this.isignup.value).subscribe(res=>{
+    this.http.post<any>(environment.apiUrl+'/api/auth/signup',this.isignup.value).subscribe(res=>{
       console.log(res);
-      if(res.success){
+      if(res.success == true){
+        this.isSuccessul = true;
         this.router.navigate(['/i/flow/login']);
       }
-    },err=>{
-      console.log(err);
+    },(err:Error | HttpErrorResponse)=>{
+      this.errorMessage = err.message;
     })
   }
 
