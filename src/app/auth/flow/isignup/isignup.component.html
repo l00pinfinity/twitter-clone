@@ -7,6 +7,10 @@
       <label for="email">Email address</label>
     </div>
     <div class="form-floating mb-3">
+      <input type="text" class="form-control" formControlName="name" id="name" placeholder="Name">
+      <label for="name">Full names</label>
+    </div>
+    <div class="form-floating mb-3">
         <input type="text" class="form-control" formControlName="username" id="username" placeholder="username">
         <label for="username">Username</label>
       </div>
@@ -15,6 +19,8 @@
       <label for="password">Password</label>
     </div>
     <br><br>
-    <button class="w-100 btn btn-lg btn-primary" type="submit" [disabled]="isignup.invalid">Sign Up</button>
+    <button class="w-100 btn btn-lg btn-secondary" type="submit" [disabled]="isignup.invalid">Sign Up</button>
+    <hr>
+    <p class="d-flex justify-content-center">Have an account already? <a href="/i/flow/login"> Log in</a></p>
   </form>
 </main>

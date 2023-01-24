@@ -16,7 +16,6 @@ export class TweetsComponent implements OnInit {
 
   getTweets(){
     this.data.getTweets(this.page,this.size).subscribe(data => {
-      console.log(data);
       this.tweets$ = data.content;
     })
   }

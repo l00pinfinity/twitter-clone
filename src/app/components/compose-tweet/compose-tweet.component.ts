@@ -15,8 +15,7 @@ export class ComposeTweetComponent implements OnInit {
   constructor(private http:HttpClient) { }
 
   tweet = new FormGroup({
-    body: new FormControl('', [Validators.required]),
-    tags: new FormControl([])
+    body: new FormControl('', [Validators.required])
   });
 
   ngOnInit(): void {

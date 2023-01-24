@@ -9,25 +9,33 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  isLoggedIn = true;
-  username = "";
+  isLoggedIn: boolean = false;
+  currentUser$: any;
 
   constructor(private auth: AuthService, private router: Router, private data: DataService) { }
 
   logout() {
-    this.router.navigateByUrl('/home');
     this.auth.logout();
+    this.router.navigateByUrl('/login');
     this.isLoggedIn = false;
   }
 
-  accountInfo() {
-    this.data.accountInfo().subscribe(data => {
-      this.username = data.lastName;
+  currentUser(){
+    this.data.getCurrentUser().subscribe(user =>{
+      this.currentUser$ = user;
     })
   }
 
+  checkIfLoggedIn() {
+    if (this.auth.isLoggedIn() == true) {
+      this.isLoggedIn = true;
+
+    }
+  }
+
   ngOnInit(): void {
-    this.accountInfo();
+    this.checkIfLoggedIn();
+    this.currentUser();
   }
 
 }

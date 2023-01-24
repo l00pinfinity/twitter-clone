@@ -14,7 +14,11 @@ export class DataService {
     return this.http.get<any>(environment.apiUrl + '/api/tweets?page=' + page + '&size=' + size);
   }
 
-  public accountInfo(){
+  public getCurrentUser(){
     return this.http.get<any>(environment.apiUrl + '/api/users/me');
+  }
+
+  public getTrendsForYou(size: Number){
+    return this.http.get<any>(environment.apiUrl + '/api/trends?size=' + size);
   }
 }

@@ -16,6 +16,7 @@ export class IsignupComponent implements OnInit {
 
   isignup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
+    name: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
