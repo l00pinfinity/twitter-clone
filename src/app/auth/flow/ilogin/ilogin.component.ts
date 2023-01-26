@@ -27,9 +27,9 @@ export class IloginComponent implements OnInit {
 
   //on form submit
   loginUser() {
-    console.log(this.ilogin.value);
+    //console.log(this.ilogin.value);
     this.http.post<any>(environment.apiUrl+'/api/auth/signin',this.ilogin.value).subscribe(res=>{
-      console.log(res);
+      //console.log(res);
       if(res){
         this.tokenStorage.setSession(res);
         this.isLoggedIn = true;
