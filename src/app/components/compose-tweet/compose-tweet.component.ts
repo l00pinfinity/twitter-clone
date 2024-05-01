@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -14,8 +14,8 @@ export class ComposeTweetComponent implements OnInit {
 
   constructor(private http:HttpClient) { }
 
-  tweet = new FormGroup({
-    body: new FormControl('', [Validators.required])
+  tweet = new UntypedFormGroup({
+    body: new UntypedFormControl('', [Validators.required])
   });
 
   ngOnInit(): void {

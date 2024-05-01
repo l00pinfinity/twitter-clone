@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/services/token-storage.service';
 import { environment } from 'src/environments/environment';
@@ -15,9 +15,9 @@ export class IloginComponent implements OnInit {
   isLoggedIn = false;
   errorMessage!: string;
 
-  ilogin = new FormGroup({
-    usernameOrEmail: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+  ilogin = new UntypedFormGroup({
+    usernameOrEmail: new UntypedFormControl('', [Validators.required]),
+    password: new UntypedFormControl('', [Validators.required, Validators.minLength(6)])
   });
 
   constructor(private http:HttpClient,private router:Router,private tokenStorage: TokenStorageService) { }
