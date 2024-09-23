@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,26 +19,21 @@ import { TokenInterceptorInterceptor } from './services/interceptor/token-interc
 import { DateAgoPipe } from './services/pipe/date-ago.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SignupComponent,
-    NavbarComponent,
-    HomeComponent,
-    TrendsComponent,
-    TweetsComponent,
-    ComposeTweetComponent,
-    ExploreComponent,
-    IloginComponent,
-    IsignupComponent,
-    DateAgoPipe
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-  ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorInterceptor, multi: true }],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        SignupComponent,
+        NavbarComponent,
+        HomeComponent,
+        TrendsComponent,
+        TweetsComponent,
+        ComposeTweetComponent,
+        ExploreComponent,
+        IloginComponent,
+        IsignupComponent,
+        DateAgoPipe
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule], providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorInterceptor, multi: true }, provideHttpClient(withInterceptorsFromDi())]
 })
 export class AppModule { }
