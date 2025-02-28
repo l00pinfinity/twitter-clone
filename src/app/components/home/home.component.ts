@@ -11,14 +11,10 @@ export class HomeComponent implements OnInit {
 
   isLoggedIn: boolean = false;
 
-  constructor(private auth:AuthService,private router:Router) { }
+  constructor(private authService:AuthService,private router:Router) { }
 
   checkIfLoggedIn() {
-    if (this.auth.isLoggedIn() == true) {
-      this.isLoggedIn = true;
-    }else{
-      this.router.navigateByUrl('/login');
-    }
+    this.authService.isLoggedIn().subscribe(isLoggedIn => console.log(isLoggedIn));
   }
 
   ngOnInit(): void {

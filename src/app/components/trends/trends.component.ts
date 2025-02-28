@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 
@@ -9,27 +10,18 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class TrendsComponent implements OnInit {
 
-  trends$: any;
+  trends$: Observable<any[]>;
   size = 10;
-  isLoggedIn: boolean = false;
 
-  constructor(private data:DataService,private auth: AuthService) { }
-
-  getTrendsForYou(){
-    this.data.getTrendsForYou(this.size).subscribe(data => {
-      this.trends$ = data.content;
-    })
-  }
-
-  checkIfLoggedIn() {
-    if (this.auth.isLoggedIn() == true) {
-      this.isLoggedIn = true;
-    }
+  constructor(private data:DataService,private authService: AuthService) { 
+    this.trends$ = this.getTrendsForYou();
   }
 
   ngOnInit(): void {
-    this.getTrendsForYou();
-    this.checkIfLoggedIn();
+  }
+
+  getTrendsForYou(): Observable<any[]> {
+    return this.data.getTrendsForYou(this.size);
   }
 
 }

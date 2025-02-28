@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from 'firebase/auth';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,18 +10,36 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./explore.component.scss']
 })
 export class ExploreComponent implements OnInit {
-  isLoggedIn: boolean = false;
 
-  constructor(private auth:AuthService) { }
+  isLoggedIn: Observable<boolean> = this.authService.isLoggedIn(); 
+  currentUser$: Observable<User | null> = this.authService.getCurrentUser();
+  errorMessage!: string;
 
-  checkIfLoggedIn() {
-    if (this.auth.isLoggedIn() == true) {
-      this.isLoggedIn = true;
-    }
-  }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.checkIfLoggedIn();
+  }
+
+  signupWithGoogle(): void {
+    this.authService.continueSignupWithGoogle().subscribe({
+      next: () => {
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        this.errorMessage = err.message || 'Google signup failed. Please try again.';
+      }
+    });
+  }
+
+  signupWithApple(): void {
+    this.authService.continueSignupWithApple().subscribe({
+      next: () => {
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        this.errorMessage = err.message || 'Apple signup failed. Please try again.';
+      }
+    });
   }
 
 }

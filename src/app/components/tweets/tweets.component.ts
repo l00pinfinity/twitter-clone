@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, tap } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
+import { Tweet } from 'src/app/services/interface/tweet';
 
 @Component({
   selector: 'app-tweets',
@@ -7,21 +9,26 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./tweets.component.scss']
 })
 export class TweetsComponent implements OnInit {
-
-  tweets$: any;
+  
+  atSign = '@';
+  tweets$: Observable<Tweet[]>;
   page = 0;
   size = 10;
 
-  constructor(private data:DataService) { }
-
-  getTweets(){
-    this.data.getTweets(this.page,this.size).subscribe(data => {
-      this.tweets$ = data.content;
-    })
+  constructor(private data: DataService) {
+    this.tweets$ = this.getTweets();
   }
 
-  ngOnInit(): void {
-    this.getTweets();
+  ngOnInit(): void {}
+
+  getTweets(): Observable<Tweet[]> {
+    return this.data.getTweets(this.page, this.size).pipe(
+      tap(tweets => console.log('Fetched tweets:', tweets)) 
+    );
+  }
+  loadMore(): void {
+    this.page++;
+    this.tweets$ = this.getTweets();
   }
 
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'firebase/auth';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 
@@ -9,33 +11,18 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  isLoggedIn: boolean = false;
-  currentUser$: any;
+  isLoggedIn: Observable<boolean> = this.authService.isLoggedIn(); 
+  currentUser$: Observable<User | null> = this.authService.getCurrentUser();
+  currentUserData$: Observable<any> = this.authService.getCurrentUserData();
 
-  constructor(private auth: AuthService, private router: Router, private data: DataService) { }
-
-  logout() {
-    this.auth.logout();
-    this.router.navigateByUrl('/login');
-    this.isLoggedIn = false;
-  }
-
-  currentUser(){
-    this.data.getCurrentUser().subscribe(user =>{
-      this.currentUser$ = user;
-    })
-  }
-
-  checkIfLoggedIn() {
-    if (this.auth.isLoggedIn() == true) {
-      this.isLoggedIn = true;
-
-    }
-  }
+  constructor(private authService: AuthService, private router: Router, private data: DataService) { }
 
   ngOnInit(): void {
-    this.checkIfLoggedIn();
-    this.currentUser();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/login');
   }
 
 }

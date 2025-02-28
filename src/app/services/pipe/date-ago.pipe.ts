@@ -6,31 +6,43 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class DateAgoPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    if (value) {
-      const seconds = Math.floor((+new Date() - +new Date(value)) / 1000);
-      if (seconds < 29) // less than 30 seconds ago will show as 'Just now'
-        return 'Just now';
-      const intervals: any = {
-        'year': 31536000,
-        'month': 2592000,
-        'week': 604800,
-        'day': 86400,
-        'h': 3600,
-        'm': 60,
-        's': 1
-      };
-      let counter: string | number;
-      for (const i in intervals) {
-        counter = Math.floor(seconds / intervals[i]);
-        if (counter > 0)
-          if (counter === 1) {
-            return counter + i;
-          } else {
-            return counter + i;
-          }
+    if (!value) return value; 
+    const now = +new Date();
+    const then = +new Date(value);
+    const seconds = Math.floor((now - then) / 1000);
+
+    if (seconds < 30) {
+      return 'Just now 🔥'; 
+    }
+
+    const intervals: { [key: string]: number } = {
+      'y': 31536000,
+      'd': 86400,   
+      'h': 3600,     
+      'm': 60,      
+      's': 1        
+    };
+
+    if (seconds >= intervals['y']) {
+      const date = new Date(value);
+      return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      }); 
+    }
+
+    for (const [unit, threshold] of Object.entries(intervals)) {
+      const counter = Math.floor(seconds / threshold);
+      if (counter > 0) {
+        let flair = '';
+        if (unit === 's' && counter < 60) flair = ' ⏱️';  
+        else if (unit === 'm' && counter < 60) flair = ' ⚡'; 
+        else if (unit === 'h' && counter < 24) flair = ' 🌙';
+        else if (unit === 'd' && counter < 7) flair = ' ☀️';  
+        return `${counter}${unit}${flair}`; 
       }
     }
-    return value;
+    return 'Time’s a mystery! 🤔';
   }
-
 }
